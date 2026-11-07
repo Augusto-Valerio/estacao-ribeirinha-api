@@ -1,4 +1,4 @@
-package br.com.fiap.estacao_ribeirinha_api;
+package br.com.fiap.estacaoribeirinha;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package br.com.fiap.estacao_ribeirinha_api;
+package br.com.fiap.estacaoribeirinha;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
