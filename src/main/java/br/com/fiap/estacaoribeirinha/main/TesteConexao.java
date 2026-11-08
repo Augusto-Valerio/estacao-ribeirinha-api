@@ -16,11 +16,11 @@ public class TesteConexao {
             }
 
         } catch (ClassNotFoundException erro) {
-            System.out.println("O driver do banco de dados Oracle nao foi encontrado.");
+            System.out.println("O driver do banco de dados Oracle não foi encontrado.");
             erro.printStackTrace();
 
         } catch (SQLException erro) {
-            System.out.println("Nao foi possivel conectar ao banco de dados Oracle.");
+            System.out.println("Não foi possivel conectar ao banco de dados Oracle.");
             erro.printStackTrace();
 
         } catch (IllegalStateException erro) {
