@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-
 public class AvisoDAO {
     // Insert
     public int inserir(Aviso aviso)
