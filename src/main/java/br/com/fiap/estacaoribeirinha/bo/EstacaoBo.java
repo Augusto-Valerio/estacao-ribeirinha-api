@@ -26,7 +26,7 @@ public class EstacaoBo {
         Estacao estacao = estacaoDAO.buscarPorId(idEstacao);
 
         if (estacao == null) {
-            throw new NoSuchElementException("Estacao nao encontrada.");
+            throw new NoSuchElementException("Estação não encontrada.");
         }
 
         return estacao;
@@ -48,7 +48,7 @@ public class EstacaoBo {
         EstacaoDAO estacaoDAO = new EstacaoDAO();
 
         if (estacao == null) {
-            throw new IllegalArgumentException("Os dados da estacao sao obrigatorios.");
+            throw new IllegalArgumentException("Os dados da estação são obrigatórios.");
         }
 
         validarId(estacao.getIdEstacao());
@@ -59,7 +59,7 @@ public class EstacaoBo {
         Estacao estacaoCadastrada = estacaoDAO.buscarPorId(estacao.getIdEstacao());
 
         if (estacaoCadastrada == null) {
-            throw new NoSuchElementException("Estacao nao encontrada.");
+            throw new NoSuchElementException("Estação não encontrada.");
         }
 
         return estacaoDAO.atualizar(estacao);
@@ -76,7 +76,7 @@ public class EstacaoBo {
         Estacao estacao = estacaoDAO.buscarPorId(idEstacao);
 
         if (estacao == null) {
-            throw new NoSuchElementException("Estacao nao encontrada.");
+            throw new NoSuchElementException("Estação não encontrada.");
         }
 
         boolean possuiLeituras = !leituraDAO.buscarPorIdEstacao(idEstacao).isEmpty();
@@ -84,7 +84,7 @@ public class EstacaoBo {
         boolean possuiAvisos = !avisoDAO.buscarPorIdEstacao(idEstacao).isEmpty();
 
         if (possuiLeituras || possuiAvisos) {
-            throw new IllegalArgumentException("A estacao nao pode ser excluida enquanto possuir leituras ou avisos vinculados.");
+            throw new IllegalArgumentException("A estação não pode ser excluida enquanto possuir leituras ou avisos vinculados.");
         }
 
         return estacaoDAO.deletar(idEstacao);
@@ -92,13 +92,13 @@ public class EstacaoBo {
 
     private void validarId(int idEstacao) {
         if (idEstacao <= 0) {
-            throw new IllegalArgumentException("O ID da estacao deve ser maior que zero.");
+            throw new IllegalArgumentException("O ID da estação deve ser maior que zero.");
         }
     }
 
     private void validarEstacao(Estacao estacao) {
         if (estacao == null) {
-            throw new IllegalArgumentException("Os dados da estacao sao obrigatorios.");
+            throw new IllegalArgumentException("Os dados da estação são obrigatórios.");
         }
 
         validarNome(estacao.getNome());
@@ -110,37 +110,37 @@ public class EstacaoBo {
 
     private void validarNome(String nome) {
         if (nome == null || nome.isBlank()) {
-            throw new IllegalArgumentException("O nome da estacao e obrigatorio.");
+            throw new IllegalArgumentException("O nome da estação é obrigatório.");
         }
 
         if (nome.length() > 80) {
-            throw new IllegalArgumentException("O nome da estacao deve possuir no maximo 80 caracteres.");
+            throw new IllegalArgumentException("O nome da estação deve possuir no máximo 80 caracteres.");
         }
     }
 
     private void validarComunidade(String comunidade) {
         if (comunidade == null || comunidade.isBlank()) {
-            throw new IllegalArgumentException("O nome da comunidade e obrigatorio.");
+            throw new IllegalArgumentException("O nome da comunidade e obrigatório.");
         }
 
         if (comunidade.length() > 100) {
-            throw new IllegalArgumentException("A comunidade deve possuir no maximo 100 caracteres.");
+            throw new IllegalArgumentException("A comunidade deve possuir no máximo 100 caracteres.");
         }
     }
 
     private void validarMunicipio(String municipio) {
         if (municipio == null || municipio.isBlank()) {
-            throw new IllegalArgumentException("O municipio e obrigatorio.");
+            throw new IllegalArgumentException("O municipio e obrigatório.");
         }
 
         if (municipio.length() > 100) {
-            throw new IllegalArgumentException("O municipio deve possuir no maximo 100 caracteres.");
+            throw new IllegalArgumentException("O municipio deve possuir no máximo 100 caracteres.");
         }
     }
 
     private void validarUf(String uf) {
         if (uf == null || uf.isBlank()) {
-            throw new IllegalArgumentException("A UF e obrigatoria.");
+            throw new IllegalArgumentException("A UF e obrigatória.");
         }
 
         if (!uf.matches("[A-Z]{2}")) {
@@ -150,11 +150,10 @@ public class EstacaoBo {
 
     private void validarStatus(String status) {
         if (status == null || status.isBlank()) {
-            throw new IllegalArgumentException("O status da estacao e obrigatorio.");
+            throw new IllegalArgumentException("O status da estação é obrigatório.");
         }
 
-        boolean statusValido =
-                status.equals("ATIVA") || status.equals("MANUTENCAO") || status.equals("INATIVA");
+        boolean statusValido = status.equals("ATIVA") || status.equals("MANUTENCAO") || status.equals("INATIVA");
 
         if (!statusValido) {
             throw new IllegalArgumentException("O status deve ser ATIVA, MANUTENCAO ou INATIVA.");
