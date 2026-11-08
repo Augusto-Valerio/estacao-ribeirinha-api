@@ -22,7 +22,7 @@ public class TesteSelecionarEstacoes {
             }
 
         } catch (ClassNotFoundException erro) {
-            System.out.println("O driver Oravle não foi encontrado");
+            System.out.println("O driver Oracle não foi encontrado");
             erro.printStackTrace();
 
         } catch (SQLException erro) {

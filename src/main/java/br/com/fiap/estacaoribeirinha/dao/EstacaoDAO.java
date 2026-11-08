@@ -48,7 +48,7 @@ public class EstacaoDAO {
             }
         }
 
-        throw new SQLException("Nao foi possivel recuperar o ID da estacao cadastrada.");
+        throw new SQLException("Não foi possivel recuperar o ID da estação cadastrada.");
     }
 
     // Select
