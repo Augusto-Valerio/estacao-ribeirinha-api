@@ -7,54 +7,42 @@ import javax.swing.JOptionPane;
 import java.sql.SQLException;
 
 public class TesteInserirLeitura {
-    public static void main(String[] args) {
-        try {
-            int idEstacao = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID da estação"));
 
-            double nivelAgua = Double.parseDouble(JOptionPane.showInputDialog("Informe o nivel da agua em centimetros"));
+    // Inteiro
+    static int inteiro(String mensagem) {
+        return Integer.parseInt(JOptionPane.showInputDialog(mensagem));
+    }
 
-            int percentualBateria = Integer.parseInt(JOptionPane.showInputDialog("Informe o percentual da bateria"));
+    // Decimal
+    static double decimal(String mensagem) {
+        return Double.parseDouble(JOptionPane.showInputDialog(mensagem));
+    }
 
-            Leitura leitura = new Leitura(idEstacao, nivelAgua, percentualBateria, null, null);
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-            LeituraBo leituraBo = new LeituraBo();
-            int idLeitura = leituraBo.inserirBo(leitura);
+        Leitura leitura = new Leitura();
+        LeituraBo leituraBo = new LeituraBo();
 
-            Leitura leituraCadastrada = leituraBo.buscarPorIdBo(idLeitura);
+        leitura.setIdEstacao(inteiro("Informe o ID da estação"));
 
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Leitura cadastrada com sucesso!\n" +
-                            "ID gerado: " + idLeitura + "\n" +
-                            "Tendencia calculada: " +
-                            leituraCadastrada.getTendencia()
-            );
+        leitura.setNivelAguaCm(decimal("Informe o nível da água em centimetros"));
 
-        } catch (IllegalArgumentException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    erro.getMessage(),
-                    "Dados invalidos",
-                    JOptionPane.ERROR_MESSAGE
-            );
+        leitura.setPercentualBateria(inteiro("Informe o percentual da bateria"));
 
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Erro ao cadastrar a leitura no banco de dados.",
-                    "Erro de banco",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            erro.printStackTrace();
+        int idLeitura = leituraBo.inserirBo(leitura);
 
-        } catch (ClassNotFoundException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "O driver Oracle não foi encontrado.",
-                    "Erro de conexão",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            erro.printStackTrace();
-        }
+        Leitura leituraCadastrada = leituraBo.buscarPorIdBo(idLeitura);
+
+        System.out.println("ID da leitura cadastrada: " + idLeitura);
+
+        System.out.println("Tendencia calculada: " + leituraCadastrada.getTendencia());
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Leitura cadastrada com sucesso!\n" +
+                        "ID gerado: " + idLeitura + "\n" +
+                        "Tendencia calculada: " +
+                        leituraCadastrada.getTendencia()
+        );
     }
 }

@@ -7,55 +7,35 @@ import javax.swing.JOptionPane;
 import java.sql.SQLException;
 
 public class TesteInserirEstacao {
-    public static void main(String[] args) {
 
-        try {
-            String nome = JOptionPane.showInputDialog("Informe o nome da estação");
+    // String
+    static String texto(String mensagem) {
+        return JOptionPane.showInputDialog(mensagem);
+    }
 
-            String comunidade = JOptionPane.showInputDialog("Informe o nome da comunidade");
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-            String municipio = JOptionPane.showInputDialog("Informe o municipio");
+        Estacao estacao = new Estacao();
+        EstacaoBo estacaoBo = new EstacaoBo();
 
-            String uf = JOptionPane.showInputDialog("Informe a UF");
+        estacao.setNome(texto("Informe o nome da estação"));
 
-            String status = JOptionPane.showInputDialog("Informe o status: ATIVA, MANUTENCAO ou INATIVA");
+        estacao.setComunidade(texto("Informe o nome da comunidade"));
 
-            Estacao estacao = new Estacao(nome, comunidade, municipio, uf, status);
+        estacao.setMunicipio(texto("Informe o município"));
 
-            EstacaoBo estacaoBo = new EstacaoBo();
-            int idEstacao = estacaoBo.inserirBo(estacao);
+        estacao.setUf(texto("Informe a UF"));
 
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Estação cadastrada com sucesso!\n" +
-                            "ID gerado: " + idEstacao
-            );
+        estacao.setStatus(texto("Informe o status: ATIVA, MANUTENCAO ou INATIVA"));
 
-        } catch (IllegalArgumentException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    erro.getMessage(),
-                    "Dados invalidos",
-                    JOptionPane.ERROR_MESSAGE
-            );
+        int idEstacao = estacaoBo.inserirBo(estacao);
 
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Erro ao cadastrar a estação no banco de dados.",
-                    "Erro de banco",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            erro.printStackTrace();
+        System.out.println("ID da estação cadastrada: " + idEstacao);
 
-        } catch (ClassNotFoundException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "O driver Oracle não foi encontrado.",
-                    "Erro de conexão",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            erro.printStackTrace();
-        }
+        JOptionPane.showMessageDialog(
+                null,
+                "Estação cadastrada com sucesso!\n" +
+                        "ID gerado: " + idEstacao
+        );
     }
 }

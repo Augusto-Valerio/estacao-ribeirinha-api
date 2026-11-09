@@ -7,55 +7,40 @@ import javax.swing.JOptionPane;
 import java.sql.SQLException;
 
 public class TesteInserirAviso {
-    public static void main(String[] args) {
 
-        try {
-            int idEstacao = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID da estação"));
+    // String
+    static String texto(String mensagem) {
+        return JOptionPane.showInputDialog(mensagem);
+    }
 
-            String titulo = JOptionPane.showInputDialog("Informe o titulo do aviso");
+    // Inteiro
+    static int inteiro(String mensagem) {
+        return Integer.parseInt(JOptionPane.showInputDialog(mensagem));
+    }
 
-            String mensagem = JOptionPane.showInputDialog("Informe a mensagem do aviso");
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-            String nivel = JOptionPane.showInputDialog("Informe o nivel: INFORMATIVO, ATENCAO ou CRITICO");
+        Aviso aviso = new Aviso();
+        AvisoBo avisoBo = new AvisoBo();
 
-            String status = JOptionPane.showInputDialog("Informe o status: ATIVO ou ENCERRADO");
+        aviso.setIdEstacao(inteiro("Informe o ID da estação"));
 
-            Aviso aviso = new Aviso(idEstacao, titulo, mensagem, nivel, null, status);
+        aviso.setTitulo(texto("Informe o titulo do aviso"));
 
-            AvisoBo avisoBo = new AvisoBo();
-            int idAviso = avisoBo.inserirBo(aviso);
+        aviso.setMensagem(texto("Informe a mensagem do aviso"));
 
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Aviso cadastrado com sucesso!\n" +
-                            "ID gerado: " + idAviso
-            );
+        aviso.setNivel(texto("Informe o nivel: INFORMATIVO, ATENCAO ou CRITICO"));
 
-        } catch (IllegalArgumentException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    erro.getMessage(),
-                    "Dados invalidos",
-                    JOptionPane.ERROR_MESSAGE
-            );
+        aviso.setStatus(texto("Informe o status: ATIVO ou ENCERRADO"));
 
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Erro ao cadastrar o aviso no banco de dados.",
-                    "Erro de banco",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            erro.printStackTrace();
+        int idAviso = avisoBo.inserirBo(aviso);
 
-        } catch (ClassNotFoundException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "O driver Oracle não foi encontrado.",
-                    "Erro de conexão",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            erro.printStackTrace();
-        }
+        System.out.println("ID do aviso cadastrado: " + idAviso);
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Aviso cadastrado com sucesso!\n" +
+                        "ID gerado: " + idAviso
+        );
     }
 }

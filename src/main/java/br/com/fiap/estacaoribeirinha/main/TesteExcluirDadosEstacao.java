@@ -14,88 +14,66 @@ import java.util.NoSuchElementException;
 
 public class TesteExcluirDadosEstacao {
 
-    public static void main(String[] args) {
+    // Inteiro
+    static int inteiro(String mensagem) {
+        return Integer.parseInt(JOptionPane.showInputDialog(mensagem));
+    }
 
-        try {
-            int idEstacao = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID da estação de teste que será excluida"));
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-            EstacaoBo estacaoBo = new EstacaoBo();
-            LeituraBo leituraBo = new LeituraBo();
-            AvisoBo avisoBo = new AvisoBo();
+        EstacaoBo estacaoBo = new EstacaoBo();
+        LeituraBo leituraBo = new LeituraBo();
+        AvisoBo avisoBo = new AvisoBo();
 
-            Estacao estacao = estacaoBo.buscarPorIdBo(idEstacao);
+        int idEstacao = inteiro("Informe o ID da estação de teste que será excluida");
 
-            int confirmacao = JOptionPane.showConfirmDialog(
-                    null,
-                    "Deseja excluir a estacao abaixo e todos os dados vinculados?\n\n" + estacao,
-                    "Confirmar exclusão",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE
-            );
+        Estacao estacao = estacaoBo.buscarPorIdBo(idEstacao);
 
-            if (confirmacao != JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Exclusão cancelada."
-                );
-                return;
-            }
+        int confirmacao = JOptionPane.showConfirmDialog(
+                null,
+                "Deseja excluir a estação abaixo e todos os dados vinculados?\n\n" + estacao,
+                "Confirmar exclusão",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
 
-            ArrayList<Aviso> avisos = avisoBo.buscarPorIdEstacaoBo(idEstacao);
-
-            for (Aviso aviso : avisos) {
-                avisoBo.deletarBo(aviso.getIdAviso());
-            }
-
-            ArrayList<Leitura> leituras = leituraBo.buscarPorIdEstacaoBo(idEstacao);
-
-            for (Leitura leitura : leituras) {
-                leituraBo.deletarBo(leitura.getIdLeitura());
-            }
-
-            estacaoBo.deletarBo(idEstacao);
-
+        if (confirmacao != JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(
                     null,
-                    "Dados excluidos com sucesso!\n" +
-                            "Avisos excluidos: " + avisos.size() + "\n" +
-                            "Leituras excluidas: " + leituras.size() + "\n" +
-                            "Estação excluida: " + idEstacao
+                    "Exclusão cancelada."
             );
-
-        } catch (IllegalArgumentException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    erro.getMessage(),
-                    "Dados inválidos",
-                    JOptionPane.ERROR_MESSAGE
-            );
-
-        } catch (NoSuchElementException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    erro.getMessage(),
-                    "Registro não encontrado",
-                    JOptionPane.ERROR_MESSAGE
-            );
-
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Erro ao excluir os dados da estação.",
-                    "Erro de banco",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            erro.printStackTrace();
-
-        } catch (ClassNotFoundException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "O driver Oracle não foi encontrado.",
-                    "Erro de conexão",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            erro.printStackTrace();
+            return;
         }
+
+        ArrayList<Aviso> avisos = avisoBo.buscarPorIdEstacaoBo(idEstacao);
+
+        for (Aviso aviso : avisos) {
+            avisoBo.deletarBo(aviso.getIdAviso());
+        }
+
+        ArrayList<Leitura> leituras = leituraBo.buscarPorIdEstacaoBo(idEstacao);
+
+        for (Leitura leitura : leituras) {
+            leituraBo.deletarBo(leitura.getIdLeitura());
+        }
+
+        estacaoBo.deletarBo(idEstacao);
+
+        System.out.println("Estação excluida: " + idEstacao);
+
+        System.out.println("Avisos excluidos: " + avisos.size());
+
+        System.out.println("Leituras excluidas: " + leituras.size());
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Dados excluidos com sucesso!\n" +
+                        "Avisos excluidos: " +
+                        avisos.size() + "\n" +
+                        "Leituras excluidas: " +
+                        leituras.size() + "\n" +
+                        "Estacao excluida: " +
+                        idEstacao
+        );
     }
 }

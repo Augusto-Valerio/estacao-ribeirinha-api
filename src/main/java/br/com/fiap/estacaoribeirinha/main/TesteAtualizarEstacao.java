@@ -3,100 +3,48 @@ package br.com.fiap.estacaoribeirinha.main;
 import br.com.fiap.estacaoribeirinha.bo.EstacaoBo;
 import br.com.fiap.estacaoribeirinha.entities.Estacao;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.sql.SQLException;
-import java.util.NoSuchElementException;
 
 public class TesteAtualizarEstacao {
 
-    public static void main(String[] args) {
+    // String
+    static String texto(String mensagem) {
+        return JOptionPane.showInputDialog(mensagem);
+    }
 
-        try {
-            int idEstacao = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID da estação"));
+    // Inteiro
+    static int inteiro(String mensagem) {
+        return Integer.parseInt(JOptionPane.showInputDialog(mensagem));
+    }
 
-            EstacaoBo estacaoBo = new EstacaoBo();
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-            Estacao estacao = estacaoBo.buscarPorIdBo(idEstacao);
+        Estacao estacao = new Estacao();
+        EstacaoBo estacaoBo = new EstacaoBo();
 
-            String nome = JOptionPane.showInputDialog(
-                    null,
-                    "Informe o nome da estação",
-                    estacao.getNome()
-            );
+        estacao.setIdEstacao(inteiro("Informe o ID da estação"));
 
-            String comunidade = JOptionPane.showInputDialog(
-                    null,
-                    "Informe a comunidade",
-                    estacao.getComunidade()
-            );
+        estacao.setNome(texto("Informe o novo nome da estação"));
 
-            String municipio = JOptionPane.showInputDialog(
-                    null,
-                    "Informe o municipio",
-                    estacao.getMunicipio()
-            );
+        estacao.setComunidade(texto("Informe o novo nome da comunidade"));
 
-            String uf = JOptionPane.showInputDialog(
-                    null,
-                    "Informe a UF",
-                    estacao.getUf()
-            );
+        estacao.setMunicipio(texto("Informe o novo municipio"));
 
-            String status = JOptionPane.showInputDialog(
-                    null,
-                    "Informe o status: ATIVA, MANUTENCAO ou INATIVA",
-                    estacao.getStatus()
-            );
+        estacao.setUf(texto("Informe a nova UF"));
 
-            estacao.setNome(nome);
-            estacao.setComunidade(comunidade);
-            estacao.setMunicipio(municipio);
-            estacao.setUf(uf);
-            estacao.setStatus(status);
+        estacao.setStatus(texto("Informe o novo status: ATIVA, MANUTENCAO ou INATIVA"));
 
-            estacaoBo.atualizarBo(estacao);
+        estacaoBo.atualizarBo(estacao);
 
-            Estacao estacaoAtualizada = estacaoBo.buscarPorIdBo(idEstacao);
+        Estacao estacaoAtualizada = estacaoBo.buscarPorIdBo(estacao.getIdEstacao());
 
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Estação atualizada com sucesso!\n\n" +
-                            estacaoAtualizada
-            );
+        System.out.println(estacaoAtualizada);
 
-        } catch (IllegalArgumentException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    erro.getMessage(),
-                    "Dados invalidos",
-                    JOptionPane.ERROR_MESSAGE
-            );
-
-        } catch (NoSuchElementException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    erro.getMessage(),
-                    "Estação não encontrada",
-                    JOptionPane.ERROR_MESSAGE
-            );
-
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Erro ao atualizar a estação.",
-                    "Erro de banco",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            erro.printStackTrace();
-
-        } catch (ClassNotFoundException erro) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "O driver Oracle não foi encontrado.",
-                    "Erro de conexão",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            erro.printStackTrace();
-        }
+        JOptionPane.showMessageDialog(
+                null,
+                "Estação atualizada com sucesso!\n\n" +
+                        estacaoAtualizada
+        );
     }
 }
