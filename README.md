@@ -409,7 +409,7 @@ As credenciais do Oracle são configuradas no Render como variáveis de ambiente
 
 A documentação completa contém a especificação da solução, arquitetura, endpoints, telas do frontend, Diagrama Entidade-Relacionamento, diagramas de classes, evidências dos testes e instruções de execução.
 
-[Baixar a documentação da Estação Ribeirinha](./Documentacao_Estacao_Ribeirinha.pdf)
+[Baixar a documentação da Estação Ribeirinha](./Documentação_Estação_Ribeirinha.pdf)
 
 ---
 
