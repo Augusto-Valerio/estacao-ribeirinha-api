@@ -61,13 +61,15 @@ Os dados utilizados são demonstrativos e não representam medições ou alertas
 
 ## Integrantes
 
+## Integrantes
+
 | Nome | RM |
 |---|---|
-| Augusto Valerio | 562185 |
-| Pedro Marchese | 563339 |
-| Mariana Oliveira | 564241 |
-| Jonas Esteves | 564143 |
-| Vitor Tigre | 561746 |
+| [Augusto Valerio](https://github.com/Augusto-Valerio) | 562185 |
+| [Pedro Marchese](https://github.com/PedroMarchese01) | 563339 |
+| [Mariana Oliveira](https://github.com/Marirsil) | 564241 |
+| [Jonas Esteves](https://github.com/JonasEstevess) | 564143 |
+| [Vitor Tigre](https://github.com/VitorTigre) | 561746 |
 
 ---
 
