@@ -61,8 +61,6 @@ Os dados utilizados são demonstrativos e não representam medições ou alertas
 
 ## Integrantes
 
-## Integrantes
-
 | Nome | RM |
 |---|---|
 | [Augusto Valerio](https://github.com/Augusto-Valerio) | 562185 |
